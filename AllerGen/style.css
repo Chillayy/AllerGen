@@ -14,11 +14,11 @@ a {
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
-  margin-top: 30px;
-  margin-left: 450px;
-  margin-right: 450px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  margin-top: -2vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -56,10 +56,9 @@ a {
 }
 
 .saved-restaurants-pic {
-  width: 125px;
-  height: 125px;
-  background-color: #ccc;
-  margin-bottom: 20px;
+  position: absolute;
+  margin-top: -80px;
+  margin-left: 105px;
 }
 
 .profile-info {
@@ -73,8 +72,8 @@ a {
 
 .profile-info ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
 }
 
 #pfp {
@@ -89,4 +88,97 @@ a {
 
 .profile-info a:hover {
   text-decoration: underline;
+}
+
+.notifications-pic {
+  position: absolute;
+  margin-top: -55px;
+  margin-left: 70px;
+}
+
+.settings-pic {
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 50px;
+}
+
+@media (max-width: 1280px) {
+  .saved-restaurants-pic {
+    position: absolute;
+    margin-top: -80px;
+    margin-left: 85px;
+  }
+
+  .notifications-pic {
+    position: absolute;
+    margin-top: -55px;
+    margin-left: 60px;
+  }
+
+  .settings-pic {
+    position: absolute;
+    margin-top: -25px;
+    margin-left: 45px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  .profile-info a {
+    font-size: 20px;
+  }
+
+  .profile-container {
+    padding: 5vw;
+    margin-left: 30vw;
+    margin-right: 30vw;
+  }
+}
+
+@media (min-width: 1285px) {
+  .saved-restaurants-pic {
+    position: absolute;
+    margin-top: -100px;
+    margin-left: 125px;
+  }
+
+  .saved-restaurants-pic img {
+    width: 30px;
+  }
+
+  .notifications-pic {
+    position: absolute;
+    margin-top: -65px;
+    margin-left: 85px;
+  }
+
+  .notifications-pic img {
+    width: 30px;
+  }
+
+  .settings-pic {
+    position: absolute;
+    margin-top: -30px;
+    margin-left: 60px;
+  }
+
+  .settings-pic img {
+    width: 30px;
+  }
+
+  body {
+    font-size: 30px;
+  }
+
+  .profile-info a {
+    font-size: 30px;
+  }
+
+  .profile-container {
+    padding: 5vw;
+    margin-top: 5vw;
+    margin-left: 35vw;
+    margin-right: 35vw;
+  }
 }

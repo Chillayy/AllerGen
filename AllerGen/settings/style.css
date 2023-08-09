@@ -42,6 +42,31 @@ a {
   padding: 20px;
 }
 
-#preference-container {
-  margin-right: 850px;
+#save-button {
+  background-color: beige;
+  font-weight: 200;
+}
+
+#save-button:hover {
+  background-color: grey;
+}
+
+@media (min-width: 1285px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  label {
+    font-size: 25px;
+  }
+
+  select {
+    font-size: 16px;
+  }
+
+  button {
+    width: 5vw;
+    height: 2vw;
+    font-size: 25px;
+  }
 }

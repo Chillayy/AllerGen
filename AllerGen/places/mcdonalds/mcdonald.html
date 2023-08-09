@@ -7,41 +7,59 @@
     <script src="script.js" defer></script>
     <title>McDonald's Menu</title>
   </head>
+
   <body>
+    <div id="hamburger-menu">
+      <img width="50px" src="hamburger.png" />
+    </div>
+
+    <div id="hamburger-submenu">
+      <ul>
+        <li><a href="places/places.html" class="list-element">Saved</a></li>
+        <li><a href="#address" class="list-element">Address</a></li>
+        <li><a href="../index.html" class="list-element">Profile</a></li>
+      </ul>
+    </div>
     <header>
       <h1>McDonald's Menu</h1>
       <div class="filter">
         <label for="dietary-filter">Filter by Dietary Restrictions:</label>
         <select id="dietary-filter">
           <option value="all">All</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="gluten-free">Gluten-Free</option>
-          <option value="nut-free">Nut Free</option>
+          <option value="vegetarian">Eggs</option>
+          <option value="gluten-free">Shellfish</option>
+          <option value="nut-free">Peanuts</option>
+          <option value="wheat">Wheat</option>
+          <option value="fish">Fish</option>
+          <option value="soy">Soy</option>
+          <option value="milk">Dairy</option>
         </select>
       </div>
     </header>
     <section class="menu">
-      <div class="menu-item vegetarian nut-free">
+      <div class="menu-item vegetarian nut-free fish soy gluten-free milk">
         <h2>Veggie Burger</h2>
         <p>A delicious plant-based burger.</p>
       </div>
-      <div class="menu-item vegetarian nut-free">
+      <div class="menu-item vegetarian fish soy gluten-free milk">
         <h2>French Fries</h2>
-        <p>Crispy and Savory Freshly Fried</p>
+        <p>Crispy and Savory Freshly Fried.</p>
       </div>
-      <div class="menu-item vegetarian nut-free">
+      <div class="menu-item nut-free fish soy gluten-free">
         <h2>Grilled Cheese</h2>
-        <p>Cheesy Goodness</p>
+        <p>Cheesy Goodness.</p>
       </div>
-      <div class="menu-item nut-free">
+      <div class="menu-item nut-free gluten-free">
         <h2>Quarter Pounder</h2>
-        <p>Deliciously Authentic</p>
+        <p>Deliciously Authentic.</p>
       </div>
-      <div class="menu-item nut-free">
+      <div class="menu-item nut-free gluten-free fish soy">
         <h2>Big Mac</h2>
-        <p>For hungry fellas</p>
+        <p>For hungry fellas.</p>
       </div>
-      <div class="menu-item gluten-free nut-free">
+      <div
+        class="menu-item gluten-free nut-free gluten-free soy fish wheat milk"
+      >
         <h2>Grilled Chicken Salad</h2>
         <p>Fresh salad with grilled chicken.</p>
       </div>

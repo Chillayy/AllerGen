@@ -1,51 +1,65 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
-    <title>Burger King's Menu</title>
+    <title>Baratie's Menu</title>
   </head>
   <body>
+    <div id="hamburger-menu">
+      <img width="50px" src="../../images/hamburger.png" />
+    </div>
+
+    <div id="hamburger-submenu">
+      <ul>
+        <li>
+          <a href="../../places/places.html" class="list-element">Places</a>
+        </li>
+        <li><a href="#address" class="list-element">Address</a></li>
+        <li><a href="../../index.html" class="list-element">Profile</a></li>
+      </ul>
+    </div>
     <header>
       <h1>Baratie's Menu</h1>
-      <div class="filter">
-        <label for="dietary-filter">Filter by Dietary Restrictions:</label>
-        <select id="dietary-filter">
-          <option value="all">All</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="gluten-free">Gluten-Free</option>
-          <option value="nut-free">Nut Free</option>
-        </select>
-      </div>
     </header>
+
+    <button id="revealButton">Reveal Filtered</button>
+
     <section class="menu">
-      <div class="menu-item vegetarian nut-free">
+      <div class="all menu-item dairy soy">
         <h2>Mac and Cheese</h2>
         <p>Cheesy Goodness</p>
       </div>
-      <div class="menu-item vegetarian nut-free">
+      <div class="all menu-item soy">
         <h2>Margheritta Pizza</h2>
         <p>Italian Approved</p>
       </div>
-      <div class="menu-item nut-free">
+      <div class="all menu-item dairy soy wheat">
         <h2>Spaghetti and Meatballs</h2>
         <p>The Famous</p>
       </div>
-      <div class="menu-item nut-free">
+      <div class="all menu-item soy wheat">
         <h2>Fetuccinne Alfredo W/Chicken</h2>
         <p>Only the Original</p>
       </div>
-      <div class="menu-item nut-free">
+      <div class="all menu-item dairy soy wheat">
         <h2>Lasagna</h2>
         <p>Meaty and Cheesy</p>
       </div>
-      <div class="menu-item vegetarian">
+      <div class="all menu-item fish">
+        <h2>Grilled Salmon</h2>
+        <p>Fresh from East Blue</p>
+      </div>
+      <div class="all menu-item fish">
+        <h2>Sea King Delight</h2>
+        <p>An expensive mystery meal</p>
+      </div>
+      <div class="all menu-item dairy soy wheat">
         <h2>Tiramisu</h2>
         <p>Just Delicious</p>
       </div>
-      <div class="menu-item gluten-free nut-free">
+      <div class="all menu-item soy wheat">
         <h2>Grilled Chicken Salad</h2>
         <p>Fresh salad with grilled chicken.</p>
       </div>

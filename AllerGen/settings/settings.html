@@ -12,7 +12,7 @@
     </div>
     <div id="hamburger-submenu">
       <ul>
-        <li><a href="places.html" class="list-element">Places</a></li>
+        <li><a href="../places/places.html" class="list-element">Places</a></li>
         <li><a href="#address" class="list-element">Address</a></li>
         <li><a href="../index.html" class="list-element">Profile</a></li>
       </ul>
@@ -21,8 +21,9 @@
     <div class="settings-supercontainer">
       <div id="preference-container" class="preference-container">
         <h1>Dietary Restrictions</h1>
+
         <label for="allergens">Select a restriction:</label>
-        <select name="allergens" id="allergens0">
+        <select name="allergens" class="allergen-select">
           <option value="" selected disabled>Please select</option>
           <option value="peanuts">Peanuts</option>
           <option value="dairy">Dairy</option>
@@ -33,6 +34,10 @@
           <option value="fish">Fish</option>
           <option value="soy">Soy</option>
         </select>
+      </div>
+      <br />
+      <div>
+        <a><button id="save-button">Save</button></a>
       </div>
     </div>
 

@@ -62,6 +62,7 @@ select {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .name:hover {
@@ -90,4 +91,20 @@ select {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
   font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .x-margin {
+    margin-left: 1vw;
+    margin-right: 1vw;
+  }
+
+  .places-container {
+    width: 80%;
+  }
+
+  .search-container input[type="text"],
+  select {
+    width: 50%;
+  }
 }

@@ -1,8 +1,12 @@
+#head {
+  text-align: center;
+  font-size: 30px;
+}
+
 #saved-restaurants {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .section-p1 {
@@ -10,13 +14,15 @@
 }
 
 #saved-restaurants .restaurants-box {
-  width: 180px;
+  width: 280px;
   text-align: center;
   padding: 25px 15px;
   box-shadow: 20px 20px 34px rgba(0, 0, 0, 0.05);
   border: 1px solid #cce7d0;
   border-radius: 4px;
   margin: 15px 0;
+  cursor: pointer;
+  flex-wrap: wrap;
 }
 
 #saved-restaurants .restaurants-box:hover {
@@ -29,10 +35,34 @@
 }
 
 #saved-restaurants .restaurants-box h6 {
-  display: inline-block;
+  display: inline-flexbox;
   padding: 9px 8px 6px 8px;
   line-height: 1;
   border-radius: 4px;
   color: goldenrod;
   background-color: wheat;
+}
+
+#hamburger-menu {
+  display: flex;
+}
+
+#hamburger-submenu {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 20px;
+  padding-right: 10px;
+  padding-bottom: 50px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  text-decoration: none;
+}
+
+#hamburger-submenu li {
+  margin-right: 30px;
+  list-style: none;
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 10px;
 }

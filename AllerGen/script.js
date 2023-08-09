@@ -1,14 +1,20 @@
-localStorage.removeItem("Diet");
+//localStorage.removeItem("Diet");
 let diet = JSON.parse(localStorage.getItem("Diet")) || [];
 let favs = JSON.parse(localStorage.getItem("SavedHearts")) || [];
 let favPlaces = JSON.parse(localStorage.getItem("FavPlaces")) || [];
-let changed = [];
 
+let insideArray = [];
+let lastValue;
+
+let saveButton = document.getElementById("save-button");
 let selectMenu = document.getElementById("allergens0");
-let preferenceDivs = document.getElementsByClassName("preference-container");
+let preferenceDivs = document.querySelectorAll(".preference-container select");
 let hamburgerMenu = document.getElementById("hamburger-menu");
 let hamburgerSubMenu = document.getElementById("hamburger-submenu");
 let favContainers = document.getElementsByClassName("fav-container");
+let changed = Array.from({ length: preferenceDivs.length }).fill(false);
+
+let selectCounter = preferenceDivs.length;
 
 let hamburgerSubMenuState = 1;
 
@@ -33,6 +39,40 @@ function generateOptions(selectElement) {
   });
 }
 
+function handlePreferenceChange(selectElement, index) {
+  return function () {
+    let selectedValue = selectElement.value;
+    let container = selectElement.closest(".preference-container");
+    let existingSelects = container.querySelectorAll(".allergen-select");
+    if (
+      selectElement === existingSelects[existingSelects.length - 1] ||
+      insideArray.includes(selectElement)
+    ) {
+      // if (selectedValue == "") {
+      //   return;
+      // }
+      diet[index] = selectedValue;
+      console.log(diet);
+      localStorage.setItem("Diet", JSON.stringify(diet));
+
+      if (!insideArray.includes(selectElement)) {
+        let newSelect = document.createElement("select");
+        newSelect.className = "allergen-select";
+
+        container.appendChild(newSelect);
+        generateOptions(newSelect);
+
+        newSelect.addEventListener(
+          "change",
+          handlePreferenceChange(newSelect, diet.length)
+        );
+      }
+
+      insideArray.push(selectElement);
+    }
+  };
+}
+
 for (let i = 0; i < favContainers.length; i++) {
   if (favs[i] == 1) {
     let heart = favContainers[i].querySelector("#heart");
@@ -40,41 +80,77 @@ for (let i = 0; i < favContainers.length; i++) {
   }
 }
 
-for (let i = 0; i < diet.length; i++) {
-  let newSelectLabel = document.createElement("label");
-  newSelectLabel.setAttribute("for", "allergen" + diet.length - 1);
-  newSelectLabel.textContent = "Select a restriction:";
-  preferenceDiv.appendChild(newSelectLabel);
+let initialSelects = document.querySelectorAll(".allergen-select");
+initialSelects.forEach((select, index) => {
+  lastValue = select.value;
+  select.addEventListener("change", handlePreferenceChange(select, index));
 
+  let savedDiet = JSON.parse(localStorage.getItem("Diet"));
+  if (savedDiet && savedDiet[index]) {
+    select.value = savedDiet[index];
+
+    console.log(savedDiet);
+  }
+});
+
+if (localStorage.getItem("Diet") && location.href.includes("settings")) {
+  let savedDiet = JSON.parse(localStorage.getItem("Diet"));
+  for (let i = initialSelects.length; i < savedDiet.length; i++) {
+    let container = document.querySelector(".preference-container");
+    let newSelect = document.createElement("select");
+    newSelect.className = "allergen-select";
+    container.appendChild(newSelect);
+    generateOptions(newSelect);
+
+    newSelect.addEventListener("change", handlePreferenceChange(newSelect, i));
+
+    newSelect.value = savedDiet[i];
+
+    console.log(insideArray);
+
+    console.log(savedDiet);
+  }
+  let container = document.querySelector(".preference-container");
   let newSelect = document.createElement("select");
-  newSelect.setAttribute("name", "allergen" + diet.length - 1);
-  newSelect.setAttribute("id", "allergen" + diet.length - 1);
-  preferenceDiv.appendChild(newSelect);
+  newSelect.className = "allergen-select";
+  container.appendChild(newSelect);
+  generateOptions(newSelect);
+
+  newSelect.addEventListener(
+    "change",
+    handlePreferenceChange(newSelect, diet.length - 1)
+  );
 }
 
-for (let i = 0; i < preferenceDivs.length; i++) {
-  preferenceDivs[i].addEventListener("change", function () {
-    let selectedValue = this.querySelector("select").value;
-    console.log(i);
-    console.log(changed[i]);
-    if (!changed[i] || changed[i] == undefined) {
-      changed[i] = true;
-      changed.push(1);
-      diet.push(selectedValue);
-      localStorage.setItem("Diet", JSON.stringify(diet));
-      console.log("what");
-
-      let newSelectLabel = document.createElement("label");
-      newSelectLabel.setAttribute("for", "allergen" + diet.length - 1);
-      newSelectLabel.textContent = "Select a restriction:";
-      preferenceDivs[i].appendChild(newSelectLabel);
-      let newSelect = document.createElement("select");
-      newSelect.setAttribute("name", "allergen" + diet.length - 1);
-      newSelect.setAttribute("id", "allergen" + diet.length - 1);
-      preferenceDivs[i].appendChild(newSelect);
-      generateOptions(newSelect);
+for (let i = 0; i < favContainers.length; i++) {
+  favContainers[i].onclick = function () {
+    if (favs[i] !== 1) {
+      favs[i] = 1;
+      let heart = this.querySelector("#heart");
+      heart.src = "../images/fav-icon.png";
+      let parentDiv = favContainers[i].parentNode;
+      let placeName = parentDiv
+        .querySelector(".img-container")
+        .querySelector("h1").innerHTML;
+      favPlaces.push(placeName);
+      localStorage.setItem("FavPlaces", JSON.stringify(favPlaces));
+      localStorage.setItem("SavedHearts", JSON.stringify(favs));
+      console.log(favPlaces);
+    } else {
+      favs[i] = 0;
+      let heart = this.querySelector("#heart");
+      heart.src = "../images/heart-icon.png";
+      let parentDiv = favContainers[i].parentNode;
+      let placeName = parentDiv
+        .querySelector(".img-container")
+        .querySelector("h1").innerHTML;
+      let index = favPlaces.indexOf(placeName);
+      favPlaces.splice(index, 1);
+      localStorage.setItem("FavPlaces", JSON.stringify(favPlaces));
+      localStorage.setItem("SavedHearts", JSON.stringify(favs));
+      console.log(favPlaces);
     }
-  });
+  };
 }
 
 hamburgerMenu.onclick = function () {

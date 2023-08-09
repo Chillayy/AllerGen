@@ -1,37 +1,51 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const dietaryFilter = document.getElementById("dietary-filter");
-  const menuItems = document.querySelectorAll(".menu-item");
-  const displayedItems = new Set();
+const menuItems = document.querySelectorAll(".menu-item");
+const diet = JSON.parse(localStorage.getItem("Diet")) || [];
 
-  dietaryFilter.addEventListener("change", function () {
-    const selectedOption = dietaryFilter.value;
+let filterState = 1;
+let hamburgerSubMenuState = 1;
 
-    menuItems.forEach(function (item) {
-      const parentDiv = item.closest(".menu-item");
-      const parentDivHasSelectedDiet =
-        selectedOption === "all" ||
-        parentDiv.classList.contains(selectedOption);
+let hamburgerMenu = document.getElementById("hamburger-menu");
+let hamburgerSubMenu = document.getElementById("hamburger-submenu");
+let revealButton = document.getElementById("revealButton");
 
-      const itemDietaryRestrictions = Array.from(item.classList).filter(
-        (cls) => cls !== "menu-item"
+revealButton.addEventListener("click", function () {
+  if (filterState == 1) {
+    filterState = 2;
+    menuItems.forEach((menuItem) => {
+      menuItem.style.display = "block";
+      const menuItemRestrictions = Array.from(menuItem.classList);
+      const shouldHide = diet.some((item) =>
+        menuItemRestrictions.includes(item)
       );
 
-      const shouldDisplay =
-        selectedOption === "all" ||
-        item.classList.contains(selectedOption) ||
-        parentDivHasSelectedDiet ||
-        itemDietaryRestrictions.includes(selectedOption);
-
-      const wasDisplayed =
-        displayedItems.has(item) && item.style.display === "block";
-
-      item.style.display = shouldDisplay && !wasDisplayed ? "block" : "none";
-
-      if (shouldDisplay) {
-        displayedItems.add(item);
-      } else {
-        displayedItems.delete(item);
-      }
+      menuItem.style.color = shouldHide ? "Red" : "Black";
     });
-  });
+  } else {
+    filterState = 1;
+    menuItems.forEach((menuItem) => {
+      const menuItemRestrictions = Array.from(menuItem.classList);
+      const shouldHide = diet.some((item) =>
+        menuItemRestrictions.includes(item)
+      );
+
+      menuItem.style.display = shouldHide ? "none" : "block";
+    });
+  }
 });
+
+menuItems.forEach((menuItem) => {
+  const menuItemRestrictions = Array.from(menuItem.classList);
+  const shouldHide = diet.some((item) => menuItemRestrictions.includes(item));
+
+  menuItem.style.display = shouldHide ? "none" : "block";
+});
+
+hamburgerMenu.onclick = function () {
+  if (hamburgerSubMenuState == 1) {
+    hamburgerSubMenuState = 2;
+    hamburgerSubMenu.style.display = "none";
+  } else {
+    hamburgerSubMenuState = 1;
+    hamburgerSubMenu.style.display = "flex";
+  }
+};
