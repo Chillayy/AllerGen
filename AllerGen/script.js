@@ -12,11 +12,17 @@ let preferenceDivs = document.querySelectorAll(".preference-container select");
 let hamburgerMenu = document.getElementById("hamburger-menu");
 let hamburgerSubMenu = document.getElementById("hamburger-submenu");
 let favContainers = document.getElementsByClassName("fav-container");
-let changed = Array.from({ length: preferenceDivs.length }).fill(false);
 
 let selectCounter = preferenceDivs.length;
 
 let hamburgerSubMenuState = 1;
+
+for (let i = 0; i < favContainers.length; i++) {
+  if (favs[i] == 1) {
+    let heart = favContainers[i].querySelector("#heart");
+    heart.src = "../images/fav-icon.png";
+  }
+}
 
 function generateOptions(selectElement) {
   const options = [
@@ -46,11 +52,9 @@ function handlePreferenceChange(selectElement, index) {
     let existingSelects = container.querySelectorAll(".allergen-select");
     if (
       selectElement === existingSelects[existingSelects.length - 1] ||
+      selectElement === existingSelects[index] ||
       insideArray.includes(selectElement)
     ) {
-      // if (selectedValue == "") {
-      //   return;
-      // }
       diet[index] = selectedValue;
       console.log(diet);
       localStorage.setItem("Diet", JSON.stringify(diet));
@@ -73,22 +77,17 @@ function handlePreferenceChange(selectElement, index) {
   };
 }
 
-for (let i = 0; i < favContainers.length; i++) {
-  if (favs[i] == 1) {
-    let heart = favContainers[i].querySelector("#heart");
-    heart.src = "../images/fav-icon.png";
-  }
-}
-
 let initialSelects = document.querySelectorAll(".allergen-select");
 initialSelects.forEach((select, index) => {
-  lastValue = select.value;
-  select.addEventListener("change", handlePreferenceChange(select, index));
+  select.addEventListener("change", function () {
+    handlePreferenceChange(select, index)();
+  });
 
   let savedDiet = JSON.parse(localStorage.getItem("Diet"));
   if (savedDiet && savedDiet[index]) {
     select.value = savedDiet[index];
 
+    console.log(index);
     console.log(savedDiet);
   }
 });
@@ -96,18 +95,20 @@ initialSelects.forEach((select, index) => {
 if (localStorage.getItem("Diet") && location.href.includes("settings")) {
   let savedDiet = JSON.parse(localStorage.getItem("Diet"));
   for (let i = initialSelects.length; i < savedDiet.length; i++) {
+    console.log(initialSelects.length);
     let container = document.querySelector(".preference-container");
     let newSelect = document.createElement("select");
     newSelect.className = "allergen-select";
     container.appendChild(newSelect);
     generateOptions(newSelect);
 
-    newSelect.addEventListener("change", handlePreferenceChange(newSelect, i));
-
     newSelect.value = savedDiet[i];
 
-    console.log(insideArray);
+    newSelect.addEventListener("change", handlePreferenceChange(newSelect, i));
 
+    insideArray.push(newSelect);
+
+    console.log(insideArray);
     console.log(savedDiet);
   }
   let container = document.querySelector(".preference-container");

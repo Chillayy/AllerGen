@@ -47,6 +47,12 @@ a {
   padding-bottom: 10px;
 }
 
+.personal-pic {
+  position: absolute;
+  margin-top: -110px;
+  margin-left: 95px;
+}
+
 .profile-picture {
   width: 200px;
   height: 200px;
@@ -136,11 +142,30 @@ a {
   }
 }
 
+@media (max-width: 600px) {
+  .profile-info a {
+    font-size: 20px;
+  }
+
+  .profile-container {
+    padding: 5vw;
+    margin-top: 10vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}
+
 @media (min-width: 1285px) {
   .saved-restaurants-pic {
     position: absolute;
     margin-top: -100px;
     margin-left: 125px;
+  }
+
+  .personal-pic {
+    position: absolute;
+    margin-top: -140px;
+    margin-left: 145px;
   }
 
   .saved-restaurants-pic img {
